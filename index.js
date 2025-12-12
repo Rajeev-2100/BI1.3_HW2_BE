@@ -32,13 +32,13 @@ async function createHotel (newHotel){
 app.post('/', async (req,res) => {
   try {
     const savedHotel = await createHotel(req.body)
-    res.send(201).json({message: 'New Hotel added Successfully', hotel: savedHotel})
+    console.log(savedHotel)
+    res.status(201).json({message: 'New Hotel added Successfully', hotel: savedHotel})
   } catch (error) {
-    res.send(500).json({error: 'Failed to hotel Details'})
+    console.error(error)
+    res.status(500).json({error: 'Failed to hotel Details'})
   }
 })
-
-
 
 async function readAllDetailOfHotel() {
   try {
