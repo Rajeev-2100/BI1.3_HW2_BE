@@ -23,15 +23,15 @@ async function createHotel (newHotel){
     try{
         const hotel = new Hotel(newHotel)
         const saveHotel = await hotel.save()
-        console.log('New Hotel', saveHotel)
+        return saveHotel
     }catch(error){
         throw error
     }
 }
 
 app.post('/', async (req,res) => {
-  const savedHotel = await createHotel(req.body)
   try {
+    const savedHotel = await createHotel(req.body)
     res.send(201).json({message: 'New Hotel added Successfully', hotel: savedHotel})
   } catch (error) {
     res.send(500).json({error: 'Failed to hotel Details'})
