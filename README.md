@@ -236,7 +236,7 @@ npm run dev
 Create a `.env` file in the root directory:
 
 ```env
-PORT=5000
+PORT=3000
 
 MONGO_URI=your_mongodb_connection_string
 ```
