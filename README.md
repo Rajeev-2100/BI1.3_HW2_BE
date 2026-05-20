@@ -54,7 +54,7 @@ This project allows users to create, read, update, and delete hotel information 
 ## Deployment
 
 This API is deployed on Vercel.
-[Live API URL](bi-1-3-hw-2-be.vercel.app)
+[Live API URL](https://bi-1-3-hw-2-be.vercel.app)
 
 ---
 
@@ -274,15 +274,6 @@ or
 ```bash
 npm run dev
 ```
-
-## Deployment
-
-This API is deployed on Vercel.
-
-[Live API URL](https://bi-1-3-hw-2-be.vercel.app)
-
----
-
 ## Example Hotel JSON
 
 ```json
