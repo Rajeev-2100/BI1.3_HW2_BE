@@ -51,22 +51,40 @@ This project allows users to create, read, update, and delete hotel information 
 
 ---
 
+## Deployment
+
+This API is deployed on Vercel.
+[Live API URL](bi-1-3-hw-2-be.vercel.app)
+
+---
+
 ## Project Structure
 
 ```bash
+
 project/
 ├── db/
 │   └── db.connect.js
 ├── models/
 │   └── hotel.model.js
-├── useFetch.jsx
+├── .gitignore
+├── App.jsx
+├── main
 ├── vercel.json
+├── useFetch.js
 ├── index.js
-├── package-lock.json
-└── package.json
+├── package.json
+└── package-lock.json
+
 ```
 
----
+## Base URL
+
+```bash
+
+http://localhost:3000
+
+```
 
 ## MongoDB Hotel Schema
 
@@ -190,7 +208,7 @@ module.exports = connectDB
 - Creates a new hotel using hotel name request
 
 ### readHotelByRating()
-- Fetches hotels according to rating
+- Fetches hotels based on rating
 
 ### readHotelByPhoneNumber()
 - Fetches hotel details using phone number
@@ -218,6 +236,8 @@ module.exports = connectDB
 ---
 
 ## Quick Start
+
+---
 
 ```bash
 git clone https://github.com/Rajeev-2100/BI1.3_HW2_BE.git
@@ -255,6 +275,12 @@ or
 npm run dev
 ```
 
+## Deployment
+
+This API is deployed on Vercel.
+
+[Live API URL](https://bi-1-3-hw-2-be.vercel.app)
+
 ---
 
 ## Example Hotel JSON
@@ -269,7 +295,7 @@ npm run dev
   "website": "https://tajhotels.com",
   "phoneNumber": "9876543210",
   "checkInTime": "12:00 PM",
-  "checkOutTime": "11:00 AM",
+  "checkOutTime": "11:00 AM"
   "amenities": ["WiFi", "Pool", "Spa"],
   "priceRange": "$$$$ (61+)",
   "reservationsNeeded": true,
@@ -279,6 +305,17 @@ npm run dev
   "isSpaAvailable": true,
   "isRestaurantAvailable": true,
   "photos": ["image1.jpg"]
+}
+```
+
+## Example Response
+
+```json
+{
+  "message": "Hotel created successfully",
+  "data": {
+    "name": "Taj Palace"
+  }
 }
 ```
 
