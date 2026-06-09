@@ -5,7 +5,7 @@ const { initializeDatabase } = require("./db/db.connect.js");
 const fs = require("fs");
 const Hotel = require("./models/hotel.model.js");
 
-app.use(express.json())
+app.use(express.json());
 
 initializeDatabase();
 
@@ -16,36 +16,36 @@ const corsOptions = {
   optionSuccessStatus: 200,
 };
 
-
 app.use(cors(corsOptions));
 
-async function createHotel (newHotel){
-    try{
-        const hotel = new Hotel(newHotel)
-        const saveHotel = await hotel.save()
-        return saveHotel
-    }catch(error){
-        throw error
-    }
+async function createHotel(newHotel) {
+  try {
+    const hotel = new Hotel(newHotel);
+    const saveHotel = await hotel.save();
+    return saveHotel;
+  } catch (error) {
+    throw error;
+  }
 }
 
-app.post('/', async (req,res) => {
+app.post("/", async (req, res) => {
   try {
-    const savedHotel = await createHotel(req.body)
-    console.log(savedHotel)
-    res.status(201).json({message: 'New Hotel added Successfully', hotel: savedHotel})
+    const savedHotel = await createHotel(req.body);
+    console.log(savedHotel);
+    res
+      .status(201)
+      .json({ message: "New Hotel added Successfully", hotel: savedHotel });
   } catch (error) {
-    console.error(error)
-    res.status(500).json({error: 'Failed to hotel Details'})
+    res.status(500).json({ error: "Failed to hotel Details" });
   }
-})
+});
 
 async function readAllDetailOfHotel() {
   try {
     const hotel = await Hotel.find();
     return hotel;
   } catch (error) {
-    throw error;
+    console.error(error.message);
   }
 }
 
@@ -59,6 +59,7 @@ app.get("/hotels", async (req, res) => {
     }
   } catch (error) {
     res.status(505).json({ error: "Failed fetched to Hotel" });
+    console.error(error.message);
   }
 });
 
@@ -76,7 +77,6 @@ app.get("/hotels/:hotelName", async (req, res) => {
   try {
     if (hotel.length != 0) {
       res.json(hotel);
-      console.log(hotel);
     } else {
       res.status(404).json({ error: "Hotel not found" });
     }
@@ -85,31 +85,29 @@ app.get("/hotels/:hotelName", async (req, res) => {
   }
 });
 
-async function newHotel1(categoryName) {
+async function getAllDataByCategoryName(categoryName) {
   try {
-    const hotel = await Hotel.find({category: categoryName})
-    return hotel
+    const hotel = await Hotel.find({ category: categoryName });
+    return hotel;
   } catch (error) {
-    throw error
+    throw error;
   }
 }
- 
 
-app.get('/hotels/category/:hotelCategory',async (req,res) => {
-  const hotel = await newHotel1(req.params.hotelCategory)
-  
+app.get("/hotels/category/:hotelCategory", async (req, res) => {
+  const hotel = await getAllDataByCategoryName(req.params.hotelCategory);
+
   try {
-    if(hotel.length != 0){
-      res.json(hotel)
-    }else{
-      res.status(404).json({error: 'Hotel category not found'})
+    if (hotel) {
+      res.json(hotel);
+    } else {
+      res.status(404).json({ error: "Hotel category not found" });
     }
   } catch (error) {
-    console.error(error.message)
-    res.status(500).json({error: 'Failed fetching to hotel'})
+    console.error(error.message);
+    res.status(500).json({ error: "Failed fetching to hotel" });
   }
-})
-
+});
 
 async function readHotelByRating(readRating) {
   try {
@@ -134,11 +132,9 @@ app.get("/hotels/rating/:hotelRating", async (req, res) => {
   }
 });
 
-
-
-async function newHotel(isPhoneNumber) {
+async function getAllDataByPhoneNumber(isPhoneNumber) {
   try {
-    const hotel = await Hotel.findOne({ phoneNumber: isPhoneNumber });
+    const hotel = await Hotel.find({ phoneNumber: isPhoneNumber });
     return hotel;
   } catch (error) {
     throw error;
@@ -146,9 +142,9 @@ async function newHotel(isPhoneNumber) {
 }
 
 app.get("/hotels/directory/:phoneNumber", async (req, res) => {
-  const hotel = await newHotel(req.params.phoneNumber);
+  const hotel = await getAllDataByPhoneNumber(req.params.phoneNumber);
   try {
-    if (hotel.length != 0) {
+    if (hotel) {
       res.json(hotel);
     } else {
       res.status(404).json({ error: "Hotel phoneNumber not found " });
@@ -159,47 +155,57 @@ app.get("/hotels/directory/:phoneNumber", async (req, res) => {
 });
 
 async function deletedHotelById(hotelId) {
-    try {
-        const hotelDeleted = await Hotel.findByIdAndDelete(hotelId)
-        return hotelDeleted
-    } catch (error) {
-        throw error
-    }
-}
-
-app.delete('/hotels/:hotelId', async (req,res) => {
-    try {
-        const deletedHotel = await deletedHotelById(req.params.hotelId)
-        res.status(201).json({message: 'Hotel detail deleted by Database', hotel: deletedHotel})
-    } catch (error) {
-        console.error(error.message)
-        res.status(500).json({error: 'Failed to Hotel Deleted'})
-    }
-})
-
-async function updatedHotelDetailById(hotelId, dataToUpdated){
   try {
-    const updatedId = await Hotel.findByIdAndUpdate(hotelId, dataToUpdated, {new: true})
-    return updatedId
+    const hotelDeleted = await Hotel.findByIdAndDelete(hotelId);
+    return hotelDeleted;
   } catch (error) {
-    throw error
+    throw error;
   }
 }
 
-app.post('/hotels/:hotelId',async (req,res) => {
+app.delete("/hotels/:hotelId", async (req, res) => {
   try {
-    const updatedHotel = await updatedHotelDetailById(req.params.hotelId, req.body)
-    if(updatedHotel){
-      res.status(201).json({message: 'Updated Hotel Details Successfully'})
-    }else{
-      res.status(404).json({error: 'Failed Updated hotels'})
+    const deletedHotel = await deletedHotelById(req.params.hotelId);
+    res.status(201).json({
+      message: "Hotel detail deleted by Database",
+      hotel: deletedHotel,
+    });
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).json({ error: "Failed to Hotel Deleted" });
+  }
+});
+
+async function updatedHotelDetailById(hotelId, dataToUpdated) {
+  try {
+    const updatedId = await Hotel.findByIdAndUpdate(hotelId, dataToUpdated, {
+      new: true,
+    });
+    return updatedId;
+  } catch (error) {
+    throw error;
+  }
+}
+
+app.post("/hotels/:hotelId", async (req, res) => {
+  try {
+    const updatedHotel = await updatedHotelDetailById(
+      req.params.hotelId,
+      req.body,
+    );
+    if (updatedHotel) {
+      res.status(201).json({
+        message: "Updated Hotel Details Successfully",
+        data: updatedHotel,
+      });
+    } else {
+      res.status(404).json({ error: "Failed Updated hotels" });
     }
   } catch (error) {
-    console.log(error.message)
-    res.status(500).json({error: 'Failed Hotel Detail'})
+    console.log(error.message);
+    res.status(500).json({ error: "Failed Hotel Detail" });
   }
-})
-
+});
 
 const PORT = 3000;
 app.listen(PORT, () => {

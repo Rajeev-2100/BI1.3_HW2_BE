@@ -7,7 +7,7 @@ const initializeDatabase = async () => {
   await mongoose
   .connect(mongoUri)
   .then(() => console.log('Connect to Database'))
-  .catch(() => console.log('Error connecting to Database'))
+  .catch((error) => console.log('Error connecting to Database',error))
 }
 
 module.exports = { initializeDatabase }
