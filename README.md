@@ -4,13 +4,13 @@ A RESTful API built using **Node.js**, **Express.js**, **MongoDB Atlas**, and **
 
 ---
 
-### 🌐 Live API
+### 🌐 Live APP
 
-### Frontend API
+### Frontend APP
 
 https://bi-1-3-hw-2-fe.vercel.app/
 
-### Backend API
+### Backend APP
 
 https://bi-1-3-hw-2-be.vercel.app/
 
