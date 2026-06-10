@@ -6,21 +6,11 @@ A RESTful API built using **Node.js**, **Express.js**, **MongoDB Atlas**, and **
 
 ### 🌐 Live APP
 
-### Frontend APP
-
-https://bi-1-3-hw-2-fe.vercel.app/
-
-### Backend APP
-
 https://bi-1-3-hw-2-be.vercel.app/
 
 ---
 
 ## 🔗 Repository
-
-### Frontend Repository
-
-https://github.com/Rajeev-2100/BI1.3_HW2_FE.git
 
 ### Backend Repository
 
