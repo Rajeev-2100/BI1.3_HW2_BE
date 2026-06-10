@@ -4,6 +4,30 @@ A RESTful API built using **Node.js**, **Express.js**, **MongoDB Atlas**, and **
 
 ---
 
+### 🌐 Live API
+
+### Frontend API
+
+https://bi-1-3-hw-2-fe.vercel.app/
+
+### Backend API
+
+https://bi-1-3-hw-2-be.vercel.app/
+
+---
+
+## 🔗 Repository
+
+### Frontend Repository
+
+https://github.com/Rajeev-2100/BI1.3_HW2_FE.git
+
+### Backend Repository
+
+https://github.com/Rajeev-2100/BI1.3_HW2_BE.git
+
+---
+
 ## 🚀 Features
 
 * Add a new hotel
@@ -81,23 +105,22 @@ Server runs on:
 ```bash
 http://localhost:3000
 ```
-
----
+ ---
 
 ## 📖 Hotel Schema
 
 | Field                 | Type    |
 | --------------------- | ------- |
-| name                  | String  |
-| category              | Array   |
-| location              | Array   |
+| name                  | [String]  |
+| category              | [String]   |
+| location              | [String]   |
 | rating                | Number  |
-| reviews               | Array   |
+| reviews               | [String]   |
 | website               | String  |
 | phoneNumber           | String  |
 | checkInTime           | String  |
 | checkOutTime          | String  |
-| amenities             | Array   |
+| amenities             | [String]   |
 | priceRange            | String  |
 | reservationsNeeded    | Boolean |
 | isParkingAvailable    | Boolean |
@@ -105,7 +128,7 @@ http://localhost:3000
 | isPoolAvailable       | Boolean |
 | isSpaAvailable        | Boolean |
 | isRestaurantAvailable | Boolean |
-| photos                | Array   |
+| photos                | [String]   |
 
 ---
 
